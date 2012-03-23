@@ -2,3 +2,5 @@
 .DS_Store
 
 conf/config.js
+
+test.js
