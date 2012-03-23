@@ -1,8 +1,12 @@
 var express   = require('express');
 var app       = express.createServer();
-var config    = require('./config');
-var DbManager = require('./DbManager').DbManager;
+var config    = require('./conf/config');
+var DbManager = require('./lib/DbManager').DbManager;
 var util      = require('util');
+var proj      = require('./lib/proj4js-combined');
+
+
+console.log(util.inspect(proj));
 
 //create a new connection
 var db = new DbManager(config.db);

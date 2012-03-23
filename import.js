@@ -1,7 +1,6 @@
 var fs         = require('fs');
-var geo        = require('./geoFunctions');
 var mongodb    = require('mongodb');
-var config     = require('./config');
+var config     = require('./conf/config');
 var util       = require('util');
 
 //Get path for cvs files
