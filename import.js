@@ -50,30 +50,31 @@ db.open(function(err, db){
                             if(postcode != ""){
                         	
                         		//Extract easting and northing
-                                e = csvCell[2];
-                                n = csvCell[3];
+                                easting  = csvCell[2];
+                                northing = csvCell[3];
 								
 								//First convert to letter coord then latlong
-								gridRef = proj.gridrefNumToLet(e,n,8);
+								gridRef = proj.gridrefNumToLet(easting,northing,8);
 								latLong = proj.OSGridToLatLong(gridRef);
-								                                             
+								
+								//Construct the doc.                                         
                                 doc = {
                                     'postcode': postcode,
                                     'loc':{
-                                        'lat':parseFloat(latLong[0]),
-                                        'lon':parseFloat(latLong[1])           
+                                    	'lon':latLong[1],
+                                    	'lat':latLong[0]   
+                                    	
                                     }
                                 };
-                                
-                                if(typeof latLong !== "undefined"){
-                        
-	                                collection.insert(doc, {
-	                                    safe:true
-	                                }, function(err, doc){
-	                                    if(err) throw err;
-	                                });     
-                                
-                                }                                        
+                                                        
+                                //Save doc in collection
+                                collection.insert(doc, {
+                                    safe:true
+                                }, function(err, doc){
+                                    if(err) throw err;
+                                    
+                                });     
+                                     
                             }
                         }
                     });
