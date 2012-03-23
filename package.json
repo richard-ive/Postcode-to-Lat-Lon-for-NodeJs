@@ -6,7 +6,7 @@
   "description":"A postcode to LonLat web service",
   "repository": {
     "type":"git",
-    "url":""
+    "url":"git@github.com:richard-ive/Postcode-to-Lat-Lon-for-NodeJs.git"
   },
   "keywords":[
     "UK",

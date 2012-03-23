@@ -57,7 +57,7 @@ db.open(function(err, db){
                                 latLong = geo.OSGridToLatLong(gridRef);       
              
                                 doc = {
-                                    '_id':postcode,
+                                    'postcode': postcode,
                                     'loc':{
                                         'lat':parseFloat(latLong[0]),
                                         'lon':parseFloat(latLong[1])           
