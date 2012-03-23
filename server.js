@@ -5,9 +5,6 @@ var DbManager = require('./lib/DbManager').DbManager;
 var util      = require('util');
 var proj      = require('./lib/proj4js-combined');
 
-
-console.log(util.inspect(proj));
-
 //create a new connection
 var db = new DbManager(config.db);
  
