@@ -54,9 +54,9 @@ db.open(function(err, db){
                                 n = csvCell[3];
 								
 								//First convert to letter coord then latlong
-								let = proj.gridrefNumToLet(e,n,8);
-								latLong = proj.OSGridToLatLong(let);
-                                             
+								gridRef = proj.gridrefNumToLet(e,n,8);
+								latLong = proj.OSGridToLatLong(gridRef);
+								                                             
                                 doc = {
                                     'postcode': postcode,
                                     'loc':{
@@ -64,12 +64,16 @@ db.open(function(err, db){
                                         'lon':parseFloat(latLong[1])           
                                     }
                                 };
+                                
+                                if(typeof latLong !== "undefined"){
                         
-                                collection.insert(doc, {
-                                    safe:true
-                                }, function(err, doc){
-                                    if(err) throw err;
-                                });                                                
+	                                collection.insert(doc, {
+	                                    safe:true
+	                                }, function(err, doc){
+	                                    if(err) throw err;
+	                                });     
+                                
+                                }                                        
                             }
                         }
                     });
