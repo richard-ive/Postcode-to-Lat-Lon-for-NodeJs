@@ -1,0 +1,23 @@
+{
+  "name":"postcode",
+  "node":"0.6.12",
+  "author":"Richard Ive <richard@xanox.net>",
+  "version":"0.0.1",
+  "description":"A postcode to LonLat web service",
+  "repository": {
+    "type":"git",
+    "url":""
+  },
+  "keywords":[
+    "UK",
+    "postcode",
+    "longitude",
+    "latitude",
+    "web service"
+  ],
+  "dependencies": {
+    "express":">=2.5.8",
+    "mongodb":">=0.9.9-5",
+    "jade":">=0.21.0"
+  }
+}

@@ -1,0 +1,37 @@
+!!! 5
+html
+  head
+    title UK Postcode to LonLat
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='http://code.leafletjs.com/leaflet-0.3.1/leaflet.css')
+    //if lte IE 8
+      link(rel='stylesheet', href='http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css')
+    style(type='text/css')
+      html,body {
+      margin:0; padding:0;
+      height:100%;width:100%;
+      }
+  body
+    #map(style='width: 100%; height: 100%;')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    script(src='http://code.leafletjs.com/leaflet-0.3.1/leaflet.js')
+    script
+      var map = new L.Map('map');
+      var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/54527e3d1cb8468d92b1ccf2efca3539/997/256/{z}/{x}/{y}.png',
+      cloudmadeAttribution = '<form id="postcodeSearch"><lable for="postcode">Search Postcode:</lable><input type="text" id="postcode" /></form>',
+      cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
+      map.setView(new L.LatLng(51.505, -0.09), 13).addLayer(cloudmade);
+      
+      $('#postcodeSearch').live('submit', function(event){
+        event.preventDefault();
+        input = $(this).find('input');
+        postcode = input.val().replace(/ /gi,'').toUpperCase();
+        $.getJSON('postcode/' + postcode + '.json', function(data) {
+            info = eval(data);
+            
+            map.panTo(new L.LatLng(info.loc.lat, info.loc.lon));
+            
+        });
+        return false;
+      });
