@@ -45,8 +45,7 @@ app.all('/postcode/:postcode.:format?', function(req, res){
                     res.json(doc, 200);
                 });
             break;
-        }
-               
+        }              
     }else{
         next();
     }
