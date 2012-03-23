@@ -1,13 +1,13 @@
 var fs         = require('fs');
 var mongodb    = require('mongodb');
-var config     = require('./conf/config');
+var conf       = require('./conf/config');
 var util       = require('util');
+var proj       = require('./lib/geotool');
 
 //Get path for cvs files
-var path = config.importer.path;
-var conf = config.db;
+var path = conf.importer.path;
 
-db= new mongodb.Db(conf.dbname, new mongodb.Server(conf.host, conf.port, {
+db= new mongodb.Db(conf.db.dbname, new mongodb.Server(conf.db.host, conf.db.port, {
     auto_reconnect: true, 
     poolSize:10
 }, {}));
@@ -20,13 +20,13 @@ db.open(function(err, db){
     }
         
     //Authenticate user
-    db.authenticate(conf.auth.username, conf.auth.password, function(err) {
+    db.authenticate(conf.db.auth.username, conf.db.auth.password, function(err) {
         if(err){
             console.log(err);
             throw err;
         }
             
-        console.log('Connection made to: {' + conf.dbname + '} on: {' + conf.host + ':' + conf.port + '}');
+        console.log('Connection made to: {' + conf.db.dbname + '} on: {' + conf.db.host + ':' + conf.db.port + '}');
         
         db.collection(conf.collection, function(err, collection){
     
@@ -48,13 +48,15 @@ db.open(function(err, db){
                             postcode = csvCell[0].replace(/ /g,'').replace(/"/g,'');
                     
                             if(postcode != ""){
-                        
-                                easting  = csvCell[2];
-                                northing = csvCell[3];
-
-                                gridRef = geo.gridrefNumToLet(easting,northing,8);
-                                latLong = geo.OSGridToLatLong(gridRef);       
-             
+                        	
+                        		//Extract easting and northing
+                                e = csvCell[2];
+                                n = csvCell[3];
+								
+								//First convert to letter coord then latlong
+								let = proj.gridrefNumToLet(e,n,8);
+								latLong = proj.OSGridToLatLong(let);
+                                             
                                 doc = {
                                     'postcode': postcode,
                                     'loc':{
