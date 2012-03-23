@@ -28,7 +28,7 @@ db.open(function(err, db){
             
         console.log('Connection made to: {' + conf.db.dbname + '} on: {' + conf.db.host + ':' + conf.db.port + '}');
         
-        db.collection(conf.collection, function(err, collection){
+        db.collection(conf.db.collection, function(err, collection){
     
             //Start looping through files in path
             fs.readdir(path, function(err, files){
