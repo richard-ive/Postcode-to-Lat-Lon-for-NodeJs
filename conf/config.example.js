@@ -1,7 +1,7 @@
 var config = {};
 
 config.db = { 
-    host      :'',
+    host      :'localhost',
     port      :24891,
     dbname    :'',
     collection:'',
