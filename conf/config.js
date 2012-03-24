@@ -2,7 +2,7 @@ var config = {};
 
 config.db = { 
     host      :'geodb-richardive-db-0.dotcloud.com',
-    port      :16134,
+    port      :24891,
     dbname    :'geodb',
     collection:'postcode',
     auth: {
@@ -12,9 +12,7 @@ config.db = {
 };
 
 config.importer = {
-    path: '/Users/richardive/Development/postcodes/Data/',
-    srcProj: 'OSGB36',
-    destProj: 'EPSG:3785'
+    path: '/Users/richardive/Development/postcodes/Data/'
 }
 
 module.exports = config;
