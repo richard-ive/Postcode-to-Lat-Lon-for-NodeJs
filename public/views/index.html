@@ -19,7 +19,7 @@ html
     script
       var map = new L.Map('map');
       var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/54527e3d1cb8468d92b1ccf2efca3539/997/256/{z}/{x}/{y}.png',
-      cloudmadeAttribution = 'Data from <a href="http://osm.org">Open Street Map</a><form id="postcodeSearch"><lable for="postcode">Search Postcode:</lable><input type="text" id="postcode" /></form>',
+      cloudmadeAttribution = 'Data from <a href="http://osm.org">Open Street Map</a> - Contains Ordnance Survey data © Crown copyright and database right 2011 - <form id="postcodeSearch"><lable for="postcode">Search Postcode:</lable><input type="text" id="postcode" /></form>',
       cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
       map.setView(new L.LatLng(51.505, -0.09), 13).addLayer(cloudmade);
       
