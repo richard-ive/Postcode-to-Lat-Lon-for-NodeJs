@@ -11,6 +11,11 @@ config.db = {
     }
 };
 
+
+config.http = {
+	port:16156
+}
+
 config.importer = {
     path: '/Users/richardive/Development/postcodes/Data/'
 }

@@ -29,6 +29,8 @@ app.all('/postcode/:postcode.:format?', function(req, res){
     postcode = req.params.postcode.replace(/ /gi, '').toUpperCase();
   
     if(postcode){
+    	
+    	console.log("Fetching: " + postcode);
        
         switch(format){
             case 'xml':
@@ -58,4 +60,4 @@ app.get('*', function(req,res){
 });
 
 //bind server port
-app.listen(16156);
+app.listen(config.http.port);
