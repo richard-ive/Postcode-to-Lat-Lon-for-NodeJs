@@ -44,6 +44,7 @@ app.all('/postcode/:postcode.:format?', function(req, res){
                 res.contentType('application/json');
                 db.getDoc('postcode', {"postcode": postcode}, function(err, doc){
                     if(err) throw err;
+                    console.log(doc);
                     res.json(doc, 200);
                 });
             break;
