@@ -1,18 +1,25 @@
 var config = {};
 
+//Database config
 config.db = { 
-    host      :'localhost',
+    host      :'',
     port      :24891,
-    dbname    :'',
-    collection:'',
+    dbname    :'geodb',
+    collection:'postcode',
     auth: {
         username: '',
-        password: ''
+        password: '!'
     }
 };
 
+//Http config
+config.http = {
+	port:16156
+}
+
+//Importer config
 config.importer = {
-    path: '/tmp/postcodes/'
+    path: '/tmp/postcodes/Data/'
 }
 
 module.exports = config;
