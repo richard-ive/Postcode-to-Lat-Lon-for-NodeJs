@@ -13,7 +13,8 @@
     "postcode",
     "longitude",
     "latitude",
-    "web service"
+    "web service",
+    "geocode"
   ],
   "dependencies": {
     "express":">=2.5.8",
