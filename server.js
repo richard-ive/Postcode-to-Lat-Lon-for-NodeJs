@@ -67,14 +67,15 @@ app.all('/postcode/near/:postcode/:limit?', function(req, res){
             
       //Create search      
       center    = [ doc.loc.lon , doc.loc.lat ];
-      raduis    = 1; //Within 1 degree
+      radius    = 1; //Within 1 degree
       newSearch = {"loc" : {"$within" : {"$center" : [center, radius]}}}
             
       live_collection.find(newSearch, limit).toArray(function(err, docs) {
       	if(err) throw err;
       	
-        doc = JSON.stringify(docs); 
-        res.json(doc, 200);
+        obj = { postcodes : docs } ;
+        res.json(obj, 200);
+        
       });
             
     });
