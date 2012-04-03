@@ -59,21 +59,25 @@ db.open(function(err, db){
 								
 								//Construct the doc.                                         
                                 doc = {
-                                    'postcode': postcode,
-                                    'loc':{
-                                    	'lon':latLong[1],
-                                    	'lat':latLong[0]   
+                                    postcode: postcode,
+                                    loc:{
+                                    	lon:latLong[1],
+                                    	lat:latLong[0]   
                                     	
                                     }
                                 };
-                                                        
-                                //Save doc in collection
-                                collection.insert(doc, {
+                                
+                                if(doc.loc.lon > -180 && doc.loc.lon < 180 && doc.loc.lat > -180 && doc.loc.lat < 180){
+                                	                                
+                                  //Save doc in collection
+                                  collection.insert(doc, {
                                     safe:true
-                                }, function(err, doc){
+                                  }, function(err, doc){
                                     if(err) throw err;
                                     
-                                });     
+                                  }); 
+                                	
+                                }                      
                                      
                             }
                         }

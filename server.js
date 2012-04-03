@@ -42,7 +42,7 @@ app.all('/postcode/:postcode.:format?', function(req, res){
             case 'json':
             default:
                 res.contentType('application/json');
-                db.getDoc('postcode', {"postcode": postcode}, function(err, doc){
+                db.getDoc('postcode', {"postcode": postcode}, function(err, doc, live_collection){
                     if(err) throw err;
                     console.log(doc);
                     res.json(doc, 200);
@@ -53,6 +53,32 @@ app.all('/postcode/:postcode.:format?', function(req, res){
     }else{
         next();
     }
+});
+
+//postcode near routing
+app.all('/postcode/near/:postcode/:limit?', function(req, res){
+	
+    //extrct params  
+    limit    = (req.params.limit)? { limit: req.params.limit } : {} ;
+    postcode = req.params.postcode.replace(/ /gi, '').toUpperCase();
+	
+    db.getDoc('postcode', {"postcode": postcode}, function(err, doc, live_collection){
+      if(err) throw err;
+            
+      //Create search      
+      center    = [ doc.loc.lon , doc.loc.lat ];
+      raduis    = 1; //Within 1 degree
+      newSearch = {"loc" : {"$within" : {"$center" : [center, radius]}}}
+            
+      live_collection.find(newSearch, limit).toArray(function(err, docs) {
+      	if(err) throw err;
+      	
+        doc = JSON.stringify(docs); 
+        res.json(doc, 200);
+      });
+            
+    });
+		
 });
 
 //pickup any rogue requests
